@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import apt
+import apt.progress
 from src.packages_tool import CheckResidualPackage
 from src.tools import build_options
 
@@ -21,10 +22,19 @@ if __name__ == '__main__':
         print("[+] Checking: Update")
         cache = apt.Cache()
         cache.update()
+        cache.open(None)
+        cache.upgrade(True)
         cache.fetch_archives()
-        print(cache.get_changes())
+        for items in cache.get_changes():
+            print(items)
         if len(cache.get_changes()) > 0:
-            print("[+] Upgrade system")
-            cache.upgrade()
+            ans = input("Do you want upgrade system? (y/[n]) > ")
+            if ans in ['y', 's', 'Y', 'S']:
+                print("[+] Upgrade system")
+                cache.commit(apt.progress.base.AcquireProgress(),
+                             apt.progress.base.InstallProgress())
+            else:
+                cache.clear()
+                cache.close()
     if True not in args.__dict__.values():
         parser.print_help()
