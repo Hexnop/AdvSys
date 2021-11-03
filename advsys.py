@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import apt
-import apt.progress
 from src.packages_tool import CheckResidualPackage
 from src.tools import build_options
 
