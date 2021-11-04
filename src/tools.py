@@ -5,6 +5,7 @@ import os
 def check_super_user():
     if os.getuid() != 0:
         return False
+    return True
 
 
 def build_options():
