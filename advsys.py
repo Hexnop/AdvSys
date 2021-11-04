@@ -11,7 +11,7 @@ if __name__ == '__main__':
         args.sub = True
     if args.p:
         print("[+] Cleaning apt")
-        apt.Cache().clear()
+        AdvSysApt().cache.clear()
         print("[+] Checking: Packages")
         crp = CheckResidualPackage()
         if crp.check_residual_config():

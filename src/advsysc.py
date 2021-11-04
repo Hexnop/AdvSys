@@ -11,8 +11,8 @@ class AdvSysApt:
 
     def do_upgrade(self):
         self.cache.upgrade(True)
+        self.cache.cache_pre_change()
         chgs = self.cache.get_changes()
-        print(chgs)
         for items in chgs:
             print(items)
         if len(chgs) > 0:
