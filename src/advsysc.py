@@ -6,8 +6,13 @@ class AdvSysApt:
         self.cache = apt.Cache()
 
     def do_update(self):
-        self.cache.update()
-        self.cache.open(None)
+        try:
+            self.cache.update()
+            self.cache.open(None)
+        except apt.cache.LockFailedException:
+            print("[!] Privilege required root")
+            return False
+        return True
 
     def do_upgrade(self):
         self.cache.upgrade(True)

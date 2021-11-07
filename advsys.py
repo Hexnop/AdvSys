@@ -20,7 +20,7 @@ if __name__ == '__main__':
     if args.sub:
         print("[+] Checking: Update")
         asa = AdvSysApt()
-        asa.do_update()
-        asa.do_upgrade()
+        if asa.do_update():
+            asa.do_upgrade()
     if True not in args.__dict__.values():
         parser.print_help()
