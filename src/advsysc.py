@@ -18,15 +18,15 @@ class AdvSysApt:
         self.cache.upgrade(True)
         self.cache.cache_pre_change()
         chgs = self.cache.get_changes()
-        for items in chgs:
-            print(items)
         if len(chgs) > 0:
-            ans = input("Do you want upgrade system? (y/[n]) > ")
-            if ans in ['y', 's', 'Y', 'S']:
-                print("[+] Upgrade system")
-                self.cache.fetch_archives()
-                self.cache.commit(apt.progress.base.AcquireProgress(),
+            for items in chgs:
+                print(items)
+                ans = input("Do you want upgrade system? (y/[n]) > ")
+                if ans in ['y', 's', 'Y', 'S']:
+                    print("[+] Upgrade system")
+                    self.cache.fetch_archives()
+                    self.cache.commit(apt.progress.base.AcquireProgress(),
                                   apt.progress.base.InstallProgress())
-            else:
-                self.cache.clear()
-                self.cache.close()
+                else:
+                    self.cache.clear()
+                    self.cache.close()
